@@ -6,6 +6,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Getter
@@ -13,8 +14,8 @@ public class Nametag {
 
     @Getter private static Nametag instance;
 
-    private Plugin plugin;
-    private HashMap<UUID, Scoreboard> scoreboard = new HashMap<UUID, Scoreboard>();
+    private final Plugin plugin;
+    private Map<UUID, Scoreboard> scoreboard = new HashMap<>();
 
     private NametagHandler nametagHandler;
 

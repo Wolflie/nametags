@@ -1,5 +1,6 @@
 package me.colejedwards.nametag;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
@@ -31,9 +32,18 @@ public class NametagHandler {
         if (nametag.getPrefix() != null) team.setPrefix(nametag.getPrefix());
         if (nametag.getSuffix() != null) team.setSuffix(nametag.getSuffix());
 
-        team.addPlayer(player);
+        team.addEntry(player.getName());
 
         player.setScoreboard(scoreboard);
+        Nametag.getInstance().getScoreboard().put(player.getUniqueId(), scoreboard);
+    }
+
+    public void setNametag(Player player, PlayerNametag nametag) throws NametagException {
+        Scoreboard scoreboard = player.getScoreboard();
+        if (scoreboard == null) {
+            scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        }
+        setNametag(player, scoreboard, nametag);
     }
 
     public boolean doesPlayerHaveNametag(Player player) {
